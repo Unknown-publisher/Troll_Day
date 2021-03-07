@@ -5,9 +5,9 @@ local MaxWeight = 0
 local Prefix = "rbxassetid://"
 local Songs = {
 	
-	{Prefix.. 5801675015, 70, "Nokia"				        };
-	{Prefix.. 1282952408, 50, "Bill Nye"			      };
-	{Prefix.. 4902685701, 10, "Booty on his mind"	  };
+	{Prefix.. 5801675015, 70, "Nokia"				};
+	{Prefix.. 1282952408, 50, "Bill Nye"			};
+	{Prefix.. 4902685701, 10, "Booty on his mind"	};
 	{Prefix.. 5198433510, 10, "Arab goes brrrrrrr"	};
 }
 
@@ -16,7 +16,7 @@ local Songs = {
 UserSettings():GetService("UserGameSettings").MasterVolume = 10
 
 for ID, W in next, Songs do
-	MaxWeight = MaxWeight +    W[2] 
+	MaxWeight = MaxWeight + W[2] 
 end
 
 local function getRandomId(Num)
@@ -38,11 +38,15 @@ if ChosenSong then
 	Sound.Parent 	= workspace
 	Sound.Volume 	= 10
 	Sound:Play()
-	wait(10)
+	if Sound.SoundId == Prefix.. "4902685701" then
+		Sound.TimePosition = 5
+	end
+	wait(15)
 	local Tween = TweenService:Create(Sound,TweenInfo.new(1),{Volume = 0})
 	Tween:Play()
 	Tween.Completed:Connect(function(State)
-    Sound:Destroy()
+		Sound:Destroy()
 		Tween:Destroy()
 	end)
 end
+
